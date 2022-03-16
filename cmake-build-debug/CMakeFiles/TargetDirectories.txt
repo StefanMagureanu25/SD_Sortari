@@ -1,0 +1,3 @@
+D:/SD_Sortari/cmake-build-debug/CMakeFiles/SD_Sortari.dir
+D:/SD_Sortari/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/SD_Sortari/cmake-build-debug/CMakeFiles/rebuild_cache.dir
