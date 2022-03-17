@@ -1,35 +1,38 @@
 #include <iostream>
+#include <cstdlib>
 #include <vector>
+#include <fstream>
 #include <chrono>
-#include <cmath>
+#include <ctime>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
-
-void merge(vector<long long> &v, int left, int mid, int right) {
-    vector<long long> temp;
-    int j = left, i = mid + 1;
-    while (j <= mid && i <= right) {
-        if (v[j] <= v[i])
-            temp.push_back(v[j++]);
+void merge(vector<long long> &a, vector<long long> &b, vector<long long> &v) {
+    vector<long long> c;
+    long long i = 0, j = 0;
+    while (i < a.size() && j < b.size()) {
+        if (a[i] < b[j])
+            c.push_back(a[i++]);
         else
-            temp.push_back(v[i++]);
+            c.push_back(b[j++]);
     }
-    while (j <= mid)
-        temp.push_back(v[j++]);
-    while (i <= right)
-        temp.push_back(v[i++]);
-    for (int i = left; i <= right; i++)
-        v[i] = temp[i - left];
+    while (i < a.size())
+        c.push_back(a[i++]);
+    while (j < b.size())
+        c.push_back(b[j++]);
+    swap(v, c);
 }
 
-void merge_sort(vector<long long> &v, int left, int right) {
-    if (left < right) {
-        int mid = left + (right - left) / 2;
-        merge_sort(v, left, mid);
-        merge_sort(v, mid + 1, right);
-        merge(v, left, mid, right);
+void merge_sort(vector<long long> &v) {
+    if (v.size() != 1) {
+        long long mid = (long long) v.size() / 2;
+        vector<long long> b(v.begin() + mid, v.end());
+        v.resize(mid);
+        merge_sort(v);
+        merge_sort(b);
+        merge(v, b, v);
     }
 }
 
@@ -38,9 +41,10 @@ void insertion_sort(vector<long long> &v) {
         long long value = v[i];
         int j = i - 1;
         while (j >= 0 && v[j] > value) {
-            swap(v[j], v[j + 1]);
+            v[j + 1] = v[j];
             j--;
         }
+        v[j + 1] = value;
     }
 }
 
@@ -49,51 +53,72 @@ void shell_sort(vector<long long> &v) {
         for (long long i = gap; i < v.size(); i++) {
             long long value = v[i], j = i;
             while (j >= gap && value < v[j - gap]) {
-                swap(v[j], v[j - gap]);
+                v[j] = v[j - gap];
                 j -= gap;
             }
+            v[j] = value;
         }
     }
 }
 
-void shell_sort_tokuda(vector<long long> &v, long long max) {
-    vector<long long> sequence = {1};
-    while (sequence.back() <= floor(max / ceil((9 * (pow(2.25, sequence.size())) - 4) / 5)))
-        sequence.push_back(ceil((9 * (pow(2.25, sequence.size())) - 4) / 5));
-    reverse(sequence.begin(), sequence.end());
+void shell_sort_tokuda(vector<long long> &v) {
+    vector<long long> sequence = {44782196, 19903198, 8845866, 3931496, 1747331, 776591, 345152, 153401,
+                                  68178, 30301, 13467, 5985, 2660, 1182, 525, 233, 103, 46, 20, 9, 4, 1};
     for (auto gap: sequence) {
         for (long long i = gap; i < v.size(); i++) {
             long long value = v[i], j = i;
             while (j >= gap && value < v[j - gap]) {
-                swap(v[j], v[j - gap]);
+                v[j] = v[j - gap];
                 j -= gap;
             }
+            v[j] = value;
         }
     }
 }
 
-void shell_sort_ciura(vector<long long> &v, long long max) {
-    vector<long long> sequence = {1, 4, 10, 23, 57, 132, 301, 701, 1750};
-    while (sequence.back() <= floor(max / 2.25))
-        sequence.push_back(floor(sequence.back() * 2.25));
-    reverse(sequence.begin(), sequence.end());
+void shell_sort_ciura(vector<long long> &v) {
+    vector<long long> sequence = {66271020, 29453787, 13090572, 5818032, 2585792, 1149241, 510774, 227011,
+                                  100894, 44842, 19930, 8858, 3937, 1750, 701, 301, 132, 57, 23, 10, 4, 1};
     for (auto gap: sequence) {
         for (long long i = gap; i < v.size(); i++) {
             long long value = v[i], j = i;
             while (j >= gap && value < v[j - gap]) {
-                swap(v[j], v[j - gap]);
+                v[j] = v[j - gap];
                 j -= gap;
             }
+            v[j] = value;
         }
     }
 }
 
+void counting_sort(vector<long long> &v) {
+    map<long long, long long> freq;
+    for (auto it: v)
+        freq[it]++;
+    vector<long long> v_sorted;
+    for (auto it: freq)
+        while (it.second) {
+            v_sorted.push_back(it.first);
+            it.second--;
+        }
+    swap(v_sorted, v);
+}
 
-bool check_sort(vector<long long> &v) {
+void radix_sort_b10(vector<long long> &v) {
+
+}
+
+void check_sort(vector<long long> &v) {
+    bool sortat = true;
     for (int i = 0; i < v.size() - 1; i++)
-        if (v[i] > v[i + 1])
-            return false;
-    return true;
+        if (v[i] > v[i + 1]) {
+            sortat = false;
+            break;
+        }
+    if (sortat)
+        cout << "Sortat cu succes";
+    else
+        cout << "Nesortat";
 }
 
 void print_vector(vector<long long> &v) {
@@ -103,13 +128,83 @@ void print_vector(vector<long long> &v) {
 }
 
 int main() {
-    vector<long long> v;
-    int n;
+    ifstream fin("D:\\SD_Sortari\\input.in");
+    ofstream fout("D:\\SD_Sortari\\output.txt");
+    int T, N, Max;
     long long x;
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> x;
-        v.push_back(x);
-    }
+    fin >> T;   //numarul de teste
+    for (int i = 0; i < T; i++) {
+        srand(unsigned(time(NULL)));
+        fin >> N >> Max;
+        vector<long long> v(N);
+        generate(v.begin(), v.end(), rand);
+        for (auto &it: v)
+            it = (it * it * it * it) % Max;
+        cout << "\nN=" << N;
+        cout << "\nMax=" << Max << "\n";
+        vector<long long> a = v;
 
+        auto begin = chrono::high_resolution_clock::now();
+        sort(a.begin(), a.end());
+        auto end = chrono::high_resolution_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "C++ sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        merge_sort(a);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        shell_sort(a);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Shell sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        shell_sort_tokuda(a);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Shell sort tokuda: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        shell_sort_ciura(a);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Shell sort ciura: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        counting_sort(a);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Counting sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+//        a = v;
+//        begin = chrono::high_resolution_clock::now();
+//        insertion_sort(a);
+//        end = chrono::high_resolution_clock::now();
+//        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+//        cout << "Insertion sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+//        check_sort(a);
+//        cout << "\n";
+    }
 }
