@@ -9,7 +9,8 @@
 #include <map>
 
 using namespace std;
-
+ifstream fin("D:\\SD_Sortari\\input.in");
+ofstream fout("D:\\SD_Sortari\\output.txt");
 
 void merge(vector<long long> &a, vector<long long> &b, vector<long long> &v) {
     vector<long long> c;
@@ -163,14 +164,12 @@ void check_sort(vector<long long> &v) {
             break;
         }
     if (sortat)
-        cout << "Sortat cu succes";
+        fout << "Sortat cu succes";
     else
-        cout << "Nesortat";
+        fout << "Nesortat";
 }
 
 int main() {
-    ifstream fin("D:\\SD_Sortari\\input.in");
-    //ofstream fout("D:\\SD_Sortari\\output.txt");
     long long T, N, Max;
     fin >> T;   //numarul de teste
     for (long long i = 0; i < T; i++) {
@@ -180,80 +179,80 @@ int main() {
         generate(v.begin(), v.end(), rand);
         for (auto &it: v)
             it = (long long) (pow(it, 2)) % Max;
-        cout << "N=" << N;
-        cout << "\nMax=" << Max << "\n";
+        fout << "N=" << N;
+        fout << "\nMax=" << Max << "\n";
         vector<long long> a = v;
 
         auto begin = chrono::high_resolution_clock::now();
         sort(a.begin(), a.end());
         auto end = chrono::high_resolution_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "C++ sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "C++ sort: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
-
-        a = v;
-        begin = chrono::high_resolution_clock::now();
-        merge_sort(a);
-        end = chrono::high_resolution_clock::now();
-        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
-        check_sort(a);
-        cout << "\n";
-
+        fout << "\n";
+        if (N < pow(10, 8)) {
+            a = v;
+            begin = chrono::high_resolution_clock::now();
+            merge_sort(a);
+            end = chrono::high_resolution_clock::now();
+            elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+            fout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+            check_sort(a);
+            fout << "\n";
+        }
         a = v;
         begin = chrono::high_resolution_clock::now();
         radix_sort(a, 10);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Radix sort baza 10: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Radix sort baza 10: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
+        fout << "\n";
 
         a = v;
         begin = chrono::high_resolution_clock::now();
         radix_sort(a, 16);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Radix sort baza 16: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Radix sort baza 16: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
+        fout << "\n";
 
         a = v;
         begin = chrono::high_resolution_clock::now();
         radix_sort(a, 8);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Radix sort baza 8: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Radix sort baza 8: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
+        fout << "\n";
 
         a = v;
         begin = chrono::high_resolution_clock::now();
         radix_sort(a, 65536);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Radix sort baza 2^16: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Radix sort baza 2^16: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
+        fout << "\n";
 
         a = v;
         begin = chrono::high_resolution_clock::now();
         radix_sort_shift(a, 16);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Radix sort baza 2^16 shift: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Radix sort baza 2^16 shift: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
+        fout << "\n";
 
         a = v;
         begin = chrono::high_resolution_clock::now();
         shell_sort(a);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Shell sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Shell sort: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
+        fout << "\n";
 
 
         a = v;
@@ -261,36 +260,38 @@ int main() {
         shell_sort_tokuda(a);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Shell sort tokuda: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Shell sort tokuda: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
+        fout << "\n";
 
         a = v;
         begin = chrono::high_resolution_clock::now();
         shell_sort_ciura(a);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Shell sort ciura: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Shell sort ciura: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
+        fout << "\n";
 
         a = v;
         begin = chrono::high_resolution_clock::now();
         counting_sort(a);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Counting sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        fout << "Counting sort: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
-        cout << "\n";
-
-//        a = v;
-//        begin = chrono::high_resolution_clock::now();
-//        insertion_sort(a);
-//        end = chrono::high_resolution_clock::now();
-//        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-//        cout << "Insertion sort: " << double(double(elapsed.count()) / 1000000) << "s ";
-//        check_sort(a);
-//        cout << "\n";
+        fout << "\n";
+        if (N < pow(10, 5)) {
+            a = v;
+            begin = chrono::high_resolution_clock::now();
+            insertion_sort(a);
+            end = chrono::high_resolution_clock::now();
+            elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+            fout << "Insertion sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+            check_sort(a);
+            fout << "\n\n";
+        } else
+            fout << "\n";
     }
     return 0;
 }
