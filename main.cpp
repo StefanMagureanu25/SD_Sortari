@@ -281,7 +281,7 @@ int main() {
         fout << "Counting sort: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
         fout << "\n";
-        if (N < pow(10, 5)) {
+        if (N < pow(10, 7)) {
             a = v;
             begin = chrono::high_resolution_clock::now();
             insertion_sort(a);
