@@ -3,11 +3,13 @@
 #include <vector>
 #include <fstream>
 #include <chrono>
+#include <cmath>
 #include <ctime>
 #include <algorithm>
 #include <map>
 
 using namespace std;
+
 
 void merge(vector<long long> &a, vector<long long> &b, vector<long long> &v) {
     vector<long long> c;
@@ -37,9 +39,9 @@ void merge_sort(vector<long long> &v) {
 }
 
 void insertion_sort(vector<long long> &v) {
-    for (int i = 1; i < v.size(); i++) {
+    for (long long i = 1; i < v.size(); i++) {
         long long value = v[i];
-        int j = i - 1;
+        long long j = i - 1;
         while (j >= 0 && v[j] > value) {
             v[j + 1] = v[j];
             j--;
@@ -91,6 +93,31 @@ void shell_sort_ciura(vector<long long> &v) {
     }
 }
 
+void radix_sort(vector<long long> &v, int baza) {
+    long long exponent = 1;
+    long long max = v[0], i;
+    for (auto it: v)
+        if (it > max)
+            max = it;
+    while (max / exponent != 0) {
+        vector<long long> result(v.size());
+        vector<long long> count(baza, 0);
+        for (auto it: v)
+            count[(it / exponent) % baza]++;
+        for (i = 1; i < baza; i++)
+            count[i] += count[i - 1];
+        for (i = v.size() - 1; i >= 0; i--) {
+            long long aux = (v[i] / exponent) % baza;
+            result[count[aux] - 1] = v[i];
+            count[aux]--;
+        }
+        for (i = 0; i < v.size(); i++)
+            v[i] = result[i];
+        exponent *= baza;
+    }
+}
+
+
 void counting_sort(vector<long long> &v) {
     map<long long, long long> freq;
     for (auto it: v)
@@ -102,10 +129,6 @@ void counting_sort(vector<long long> &v) {
             it.second--;
         }
     swap(v_sorted, v);
-}
-
-void radix_sort_b10(vector<long long> &v) {
-
 }
 
 void check_sort(vector<long long> &v) {
@@ -121,26 +144,19 @@ void check_sort(vector<long long> &v) {
         cout << "Nesortat";
 }
 
-void print_vector(vector<long long> &v) {
-    for (auto it: v)
-        cout << it << " ";
-    cout << "\n";
-}
-
 int main() {
     ifstream fin("D:\\SD_Sortari\\input.in");
-    ofstream fout("D:\\SD_Sortari\\output.txt");
-    int T, N, Max;
-    long long x;
+    //ofstream fout("D:\\SD_Sortari\\output.txt");
+    long long T, N, Max;
     fin >> T;   //numarul de teste
-    for (int i = 0; i < T; i++) {
-        srand(unsigned(time(NULL)));
+    for (long long i = 0; i < T; i++) {
+        srand(unsigned(time(nullptr)));
         fin >> N >> Max;
         vector<long long> v(N);
         generate(v.begin(), v.end(), rand);
         for (auto &it: v)
-            it = (it * it * it * it) % Max;
-        cout << "\nN=" << N;
+            it = (long long) (pow(it, 2)) % Max;
+        cout << "N=" << N;
         cout << "\nMax=" << Max << "\n";
         vector<long long> a = v;
 
@@ -152,12 +168,30 @@ int main() {
         check_sort(a);
         cout << "\n";
 
+//        a = v;
+//        begin = chrono::high_resolution_clock::now();
+//        merge_sort(a);
+//        end = chrono::high_resolution_clock::now();
+//        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+//        cout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+//        check_sort(a);
+//        cout << "\n";
+
         a = v;
         begin = chrono::high_resolution_clock::now();
-        merge_sort(a);
+        radix_sort(a, 10);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-        cout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        cout << "Radix sort baza 10: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        radix_sort(a, 65536);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Radix sort baza 2^16: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
         cout << "\n";
 
