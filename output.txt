@@ -1,115 +1,117 @@
 N=1000
 Max=1000
-C++ sort: 0.000118s Sortat cu succes
-Merge sort: 0.001028s Sortat cu succes
-Radix sort baza 10: 7e-05s Sortat cu succes
-Radix sort baza 16: 7.1e-05s Sortat cu succes
+C++ sort: 0.000124s Sortat cu succes
+Merge sort: 0.001034s Sortat cu succes
+Radix sort baza 10: 7.8e-05s Sortat cu succes
+Radix sort baza 16: 6.8e-05s Sortat cu succes
 Radix sort baza 8: 8.9e-05s Sortat cu succes
-Radix sort baza 2^16: 0.000343s Sortat cu succes
-Radix sort baza 2^16 shift: 0.00024s Sortat cu succes
-Shell sort: 0.00012s Sortat cu succes
-Shell sort tokuda: 0.000107s Sortat cu succes
+Radix sort baza 2^16: 0.000449s Sortat cu succes
+Radix sort baza 2^16 shift: 0.000241s Sortat cu succes
+Shell sort: 0.000119s Sortat cu succes
+Shell sort tokuda: 0.00011s Sortat cu succes
 Shell sort ciura: 0.000118s Sortat cu succes
-Counting sort: 0.000203s Sortat cu succes
-Insertion sort: 0.000889s Sortat cu succes
+Counting sort: 0.000187s Sortat cu succes
+Insertion sort: 0.00091s Sortat cu succes
 
 N=10000000
 Max=100
-C++ sort: 2.25055s Sortat cu succes
-Merge sort: 11.9705s Sortat cu succes
-Radix sort baza 10: 0.526472s Sortat cu succes
-Radix sort baza 16: 0.529586s Sortat cu succes
-Radix sort baza 8: 0.770399s Sortat cu succes
-Radix sort baza 2^16: 0.298538s Sortat cu succes
-Radix sort baza 2^16 shift: 0.278805s Sortat cu succes
-Shell sort: 2.62786s Sortat cu succes
-Shell sort tokuda: 1.71884s Sortat cu succes
-Shell sort ciura: 1.84461s Sortat cu succes
-Counting sort: 0.99359s Sortat cu succes
+C++ sort: 2.35579s Sortat cu succes
+Merge sort: 11.4145s Sortat cu succes
+Radix sort baza 10: 0.493176s Sortat cu succes
+Radix sort baza 16: 0.498061s Sortat cu succes
+Radix sort baza 8: 0.731451s Sortat cu succes
+Radix sort baza 2^16: 0.285569s Sortat cu succes
+Radix sort baza 2^16 shift: 0.253863s Sortat cu succes
+Shell sort: 2.48827s Sortat cu succes
+Shell sort tokuda: 1.63008s Sortat cu succes
+Shell sort ciura: 1.72744s Sortat cu succes
+Counting sort: 0.966539s Sortat cu succes
 
 N=10000
 Max=1000000
-C++ sort: 0.001697s Sortat cu succes
-Merge sort: 0.010493s Sortat cu succes
-Radix sort baza 10: 0.001416s Sortat cu succes
-Radix sort baza 16: 0.001168s Sortat cu succes
-Radix sort baza 8: 0.001603s Sortat cu succes
-Radix sort baza 2^16: 0.001029s Sortat cu succes
-Radix sort baza 2^16 shift: 0.001133s Sortat cu succes
-Shell sort: 0.002117s Sortat cu succes
-Shell sort tokuda: 0.001746s Sortat cu succes
-Shell sort ciura: 0.001905s Sortat cu succes
-Counting sort: 0.004331s Sortat cu succes
-Insertion sort: 0.091799s Sortat cu succes
+C++ sort: 0.001725s Sortat cu succes
+Merge sort: 0.00968s Sortat cu succes
+Radix sort baza 10: 0.001423s Sortat cu succes
+Radix sort baza 16: 0.001246s Sortat cu succes
+Radix sort baza 8: 0.001642s Sortat cu succes
+Radix sort baza 2^16: 0.000979s Sortat cu succes
+Radix sort baza 2^16 shift: 0.000878s Sortat cu succes
+Shell sort: 0.0021s Sortat cu succes
+Shell sort tokuda: 0.001756s Sortat cu succes
+Shell sort ciura: 0.001922s Sortat cu succes
+Counting sort: 0.00436s Sortat cu succes
+Insertion sort: 0.093063s Sortat cu succes
 
 N=100
 Max=10000000
-C++ sort: 1.1e-05s Sortat cu succes
-Merge sort: 0.000115s Sortat cu succes
-Radix sort baza 10: 2.4e-05s Sortat cu succes
+C++ sort: 1e-05s Sortat cu succes
+Merge sort: 0.000113s Sortat cu succes
+Radix sort baza 10: 2.3e-05s Sortat cu succes
 Radix sort baza 16: 1.7e-05s Sortat cu succes
 Radix sort baza 8: 2.2e-05s Sortat cu succes
-Radix sort baza 2^16: 0.000579s Sortat cu succes
-Radix sort baza 2^16 shift: 0.000441s Sortat cu succes
-Shell sort: 8e-06s Sortat cu succes
+Radix sort baza 2^16: 0.000539s Sortat cu succes
+Radix sort baza 2^16 shift: 0.000455s Sortat cu succes
+Shell sort: 7e-06s Sortat cu succes
 Shell sort tokuda: 8e-06s Sortat cu succes
 Shell sort ciura: 8e-06s Sortat cu succes
-Counting sort: 4.7e-05s Sortat cu succes
+Counting sort: 4.3e-05s Sortat cu succes
 Insertion sort: 1.1e-05s Sortat cu succes
 
 N=10000000
 Max=10000000
-C++ sort: 2.50166s Sortat cu succes
-Merge sort: 12.3563s Sortat cu succes
-Radix sort baza 10: 1.97805s Sortat cu succes
-Radix sort baza 16: 1.60409s Sortat cu succes
-Radix sort baza 8: 2.21553s Sortat cu succes
-Radix sort baza 2^16: 0.809809s Sortat cu succes
-Radix sort baza 2^16 shift: 0.72543s Sortat cu succes
-Shell sort: 6.89856s Sortat cu succes
-Shell sort tokuda: 3.42531s Sortat cu succes
-Shell sort ciura: 3.55071s Sortat cu succes
-Counting sort: 2.77027s Sortat cu succes
+C++ sort: 2.50433s Sortat cu succes
+Merge sort: 11.8249s Sortat cu succes
+Radix sort baza 10: 1.78374s Sortat cu succes
+Radix sort baza 16: 1.54682s Sortat cu succes
+Radix sort baza 8: 2.01094s Sortat cu succes
+Radix sort baza 2^16: 0.743453s Sortat cu succes
+Radix sort baza 2^16 shift: 0.671469s Sortat cu succes
+Shell sort: 6.89571s Sortat cu succes
+Shell sort tokuda: 3.23177s Sortat cu succes
+Shell sort ciura: 3.55595s Sortat cu succes
+Counting sort: 2.78098s Sortat cu succes
 
 N=100000000
 Max=100000000
-C++ sort: 28.215s Sortat cu succes
-Radix sort baza 10: 22.6747s Sortat cu succes
-Radix sort baza 16: 19.4934s Sortat cu succes
-Radix sort baza 8: 25.3553s Sortat cu succes
-Radix sort baza 2^16: 9.346s Sortat cu succes
-Radix sort baza 2^16 shift: 8.72233s Sortat cu succes
-Shell sort: 98.4123s Sortat cu succes
-Shell sort tokuda: 37.1756s Sortat cu succes
-Shell sort ciura: 37.8263s Sortat cu succes
-Counting sort: 34.0113s Sortat cu succes
+C++ sort: 27.8355s Sortat cu succes
+Merge sort: 123.416s Sortat cu succes
+Radix sort baza 10: 21.1863s Sortat cu succes
+Radix sort baza 16: 18.55s Sortat cu succes
+Radix sort baza 8: 23.7998s Sortat cu succes
+Radix sort baza 2^16: 8.97782s Sortat cu succes
+Radix sort baza 2^16 shift: 7.62149s Sortat cu succes
+Shell sort: 98.5271s Sortat cu succes
+Shell sort tokuda: 36.5352s Sortat cu succes
+Shell sort ciura: 37.275s Sortat cu succes
+Counting sort: 27.5351s Sortat cu succes
 
 N=100000
 Max=100000
-C++ sort: 0.019469s Sortat cu succes
-Merge sort: 0.106534s Sortat cu succes
-Radix sort baza 10: 0.011824s Sortat cu succes
-Radix sort baza 16: 0.011584s Sortat cu succes
-Radix sort baza 8: 0.014609s Sortat cu succes
-Radix sort baza 2^16: 0.006957s Sortat cu succes
-Radix sort baza 2^16 shift: 0.005614s Sortat cu succes
-Shell sort: 0.028875s Sortat cu succes
-Shell sort tokuda: 0.021136s Sortat cu succes
-Shell sort ciura: 0.023333s Sortat cu succes
-Counting sort: 0.024083s Sortat cu succes
-Insertion sort: 11.2029s Sortat cu succes
+C++ sort: 0.019475s Sortat cu succes
+Merge sort: 0.104288s Sortat cu succes
+Radix sort baza 10: 0.012307s Sortat cu succes
+Radix sort baza 16: 0.011682s Sortat cu succes
+Radix sort baza 8: 0.013887s Sortat cu succes
+Radix sort baza 2^16: 0.005985s Sortat cu succes
+Radix sort baza 2^16 shift: 0.004983s Sortat cu succes
+Shell sort: 0.029038s Sortat cu succes
+Shell sort tokuda: 0.021086s Sortat cu succes
+Shell sort ciura: 0.02313s Sortat cu succes
+Counting sort: 0.025366s Sortat cu succes
+Insertion sort: 11.3596s Sortat cu succes
 
 N=1000000
 Max=100000
-C++ sort: 0.216925s Sortat cu succes
-Merge sort: 1.09046s Sortat cu succes
-Radix sort baza 10: 0.126109s Sortat cu succes
-Radix sort baza 16: 0.127552s Sortat cu succes
-Radix sort baza 8: 0.153806s Sortat cu succes
-Radix sort baza 2^16: 0.078309s Sortat cu succes
-Radix sort baza 2^16 shift: 0.075091s Sortat cu succes
-Shell sort: 0.469237s Sortat cu succes
-Shell sort tokuda: 0.288451s Sortat cu succes
-Shell sort ciura: 0.282209s Sortat cu succes
-Counting sort: 0.221852s Sortat cu succes
+C++ sort: 0.21417s Sortat cu succes
+Merge sort: 1.04584s Sortat cu succes
+Radix sort baza 10: 0.125195s Sortat cu succes
+Radix sort baza 16: 0.122178s Sortat cu succes
+Radix sort baza 8: 0.146085s Sortat cu succes
+Radix sort baza 2^16: 0.069761s Sortat cu succes
+Radix sort baza 2^16 shift: 0.062637s Sortat cu succes
+Shell sort: 0.469569s Sortat cu succes
+Shell sort tokuda: 0.280817s Sortat cu succes
+Shell sort ciura: 0.253938s Sortat cu succes
+Counting sort: 0.215597s Sortat cu succes
+Insertion sort: 1258.78s Sortat cu succes
 

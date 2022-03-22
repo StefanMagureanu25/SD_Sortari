@@ -190,16 +190,14 @@ int main() {
         fout << "C++ sort: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
         fout << "\n";
-        if (N < pow(10, 8)) {
-            a = v;
-            begin = chrono::high_resolution_clock::now();
-            merge_sort(a);
-            end = chrono::high_resolution_clock::now();
-            elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-            fout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
-            check_sort(a);
-            fout << "\n";
-        }
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        merge_sort(a);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        fout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        fout << "\n";
         a = v;
         begin = chrono::high_resolution_clock::now();
         radix_sort(a, 10);
