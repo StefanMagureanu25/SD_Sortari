@@ -94,29 +94,53 @@ void shell_sort_ciura(vector<long long> &v) {
 }
 
 void radix_sort(vector<long long> &v, int baza) {
-    long long exponent = 1;
+    long long value = 1;
     long long max = v[0], i;
     for (auto it: v)
         if (it > max)
             max = it;
-    while (max / exponent != 0) {
+    while (max / value) {
         vector<long long> result(v.size());
         vector<long long> count(baza, 0);
         for (auto it: v)
-            count[(it / exponent) % baza]++;
+            count[(it / value) % baza]++;
         for (i = 1; i < baza; i++)
             count[i] += count[i - 1];
         for (i = v.size() - 1; i >= 0; i--) {
-            long long aux = (v[i] / exponent) % baza;
+            long long aux = (v[i] / value) % baza;
             result[count[aux] - 1] = v[i];
             count[aux]--;
         }
         for (i = 0; i < v.size(); i++)
             v[i] = result[i];
-        exponent *= baza;
+        value *= baza;
     }
 }
 
+void radix_sort_shift(vector<long long> &v, int putere) {
+    long long value = 0;
+    long long max = v[0], i;
+    long long baza = 1 << putere;   // 2^putere
+    for (auto it: v)
+        if (it > max)
+            max = it;
+    while (max >> value) {
+        vector<long long> result(v.size());
+        vector<long long> count(baza, 0);
+        for (auto it: v)
+            count[(it >> value) & (baza - 1)]++;
+        for (i = 1; i < baza; i++)
+            count[i] += count[i - 1];
+        for (i = v.size() - 1; i >= 0; i--) {
+            long long aux = (v[i] >> value) & (baza - 1);
+            result[count[aux] - 1] = v[i];
+            count[aux]--;
+        }
+        for (i = 0; i < v.size(); i++)
+            v[i] = result[i];
+        value += putere;
+    }
+}
 
 void counting_sort(vector<long long> &v) {
     map<long long, long long> freq;
@@ -168,14 +192,14 @@ int main() {
         check_sort(a);
         cout << "\n";
 
-//        a = v;
-//        begin = chrono::high_resolution_clock::now();
-//        merge_sort(a);
-//        end = chrono::high_resolution_clock::now();
-//        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
-//        cout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
-//        check_sort(a);
-//        cout << "\n";
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        merge_sort(a);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Merge sort: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
 
         a = v;
         begin = chrono::high_resolution_clock::now();
@@ -188,10 +212,37 @@ int main() {
 
         a = v;
         begin = chrono::high_resolution_clock::now();
+        radix_sort(a, 16);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Radix sort baza 16: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        radix_sort(a, 8);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Radix sort baza 8: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
         radix_sort(a, 65536);
         end = chrono::high_resolution_clock::now();
         elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
         cout << "Radix sort baza 2^16: " << double(double(elapsed.count()) / 1000000) << "s ";
+        check_sort(a);
+        cout << "\n";
+
+        a = v;
+        begin = chrono::high_resolution_clock::now();
+        radix_sort_shift(a, 16);
+        end = chrono::high_resolution_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        cout << "Radix sort baza 2^16 shift: " << double(double(elapsed.count()) / 1000000) << "s ";
         check_sort(a);
         cout << "\n";
 
@@ -241,4 +292,5 @@ int main() {
 //        check_sort(a);
 //        cout << "\n";
     }
+    return 0;
 }
